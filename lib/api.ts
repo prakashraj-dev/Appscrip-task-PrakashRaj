@@ -33,6 +33,17 @@ const MOCK_PRODUCTS: Product[] = [
 
 const MOCK_CATEGORIES = ["electronics", "jewelery", "men's clothing", "women's clothing"];
 
+export function formatCategoryLabel(category: string): string {
+  return category
+    .split(' ')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+}
+
+export function generateAltText(product: Product): string {
+  return `${product.title} - ${formatCategoryLabel(product.category)}`;
+}
+
 export async function fetchProducts(category?: string): Promise<Product[]> {
   try {
     const url = category
