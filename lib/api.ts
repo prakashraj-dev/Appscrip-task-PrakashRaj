@@ -40,8 +40,8 @@ export function formatCategoryLabel(category: string): string {
     .join(' ');
 }
 
-export function generateAltText(product: Product): string {
-  return `${product.title} - ${formatCategoryLabel(product.category)}`;
+export function generateAltText(title: string, category?: string): string {
+  return category ? `${title} - ${formatCategoryLabel(category)}` : title;
 }
 
 export async function fetchProducts(category?: string): Promise<Product[]> {
