@@ -1,4 +1,14 @@
-const MOCK_PRODUCTS = [
+export interface Product {
+  id: number;
+  title: string;
+  price: number;
+  description: string;
+  category: string;
+  image: string;
+  rating: { rate: number; count: number };
+}
+
+const MOCK_PRODUCTS: Product[] = [
   { id: 1, title: "Fjallraven - Foldsack No. 1 Backpack", price: 109.95, description: "Your perfect pack for everyday use and walks in the forest.", category: "men's clothing", image: "https://fakestoreapi.com/img/81fAn1SswnL._AC_UX679_.jpg", rating: { rate: 3.9, count: 120 } },
   { id: 2, title: "Mens Casual Premium Slim Fit T-Shirts", price: 22.3, description: "Slim-fitting style, contrast raglan long sleeve.", category: "men's clothing", image: "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg", rating: { rate: 4.1, count: 259 } },
   { id: 3, title: "Mens Cotton Jacket", price: 55.99, description: "Great outerwear jackets for Spring/Autumn/Winter.", category: "men's clothing", image: "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg", rating: { rate: 4.7, count: 500 } },
@@ -11,7 +21,7 @@ const MOCK_PRODUCTS = [
   { id: 10, title: "SanDisk SSD PLUS 1TB Internal SSD", price: 109, description: "Easy upgrade for faster boot up, shutdown, launching apps.", category: "electronics", image: "https://fakestoreapi.com/img/61U7T1koQqL._AC_SX679_.jpg", rating: { rate: 2.9, count: 470 } },
   { id: 11, title: "Silicon Power 256GB SSD", price: 109, description: "3D NAND flash are applied to deliver sequential read/write speed.", category: "electronics", image: "https://fakestoreapi.com/img/71kEqp3aZaL._AC_SX679_.jpg", rating: { rate: 4.8, count: 319 } },
   { id: 12, title: "WD 4TB Gaming Drive Works with Playstation 4 Portable External Hard Drive", price: 114, description: "Expand your PS4 gaming experience with the WD 4TB Gaming Drive.", category: "electronics", image: "https://fakestoreapi.com/img/61mtL65D4cL._AC_SX679_.jpg", rating: { rate: 4.8, count: 400 } },
-  { id: 13, title: "Acer SB220Q bi 21.5 inches Full HD (1920 x 1080) IPS Ultra-Thin", price: 599, description: "21.5 inches Full HD (1920 x 1080) widescreen IPS display.", category: "electronics", image: "https://fakestoreapi.com/img/81QpkIctqPL._AC_SX679_.jpg", rating: { rate: 2.9, count: 250 } },
+  { id: 13, title: "Acer SB220Q bi 21.5 inches Full HD IPS Ultra-Thin", price: 599, description: "21.5 inches Full HD (1920 x 1080) widescreen IPS display.", category: "electronics", image: "https://fakestoreapi.com/img/81QpkIctqPL._AC_SX679_.jpg", rating: { rate: 2.9, count: 250 } },
   { id: 14, title: "Samsung 49-Inch CHG90 144Hz Curved Gaming Monitor", price: 999.99, description: "49 INCH SUPER ULTRAWIDE 32:9 CURVED GAMING MONITOR.", category: "electronics", image: "https://fakestoreapi.com/img/81Zt42ioCgL._AC_SX679_.jpg", rating: { rate: 2.2, count: 140 } },
   { id: 15, title: "BIYLACLESEN Women's 3-in-1 Snowboard Jacket", price: 56.99, description: "Note: The Jackets is US standard size.", category: "women's clothing", image: "https://fakestoreapi.com/img/51Y5NI-I5jL._AC_UX679_.jpg", rating: { rate: 2.6, count: 235 } },
   { id: 16, title: "Lock and Love Women's Removable Hooded Faux Leather Moto Biker Jacket", price: 29.95, description: "100% POLYURETHANE(shell) 100% POLYESTER(lining).", category: "women's clothing", image: "https://fakestoreapi.com/img/81XH0e8fefL._AC_UY879_.jpg", rating: { rate: 2.9, count: 340 } },
@@ -23,46 +33,24 @@ const MOCK_PRODUCTS = [
 
 const MOCK_CATEGORIES = ["electronics", "jewelery", "men's clothing", "women's clothing"];
 
-export interface Product {
-  id: number;
-  title: string;
-  price: number;
-  description: string;
-  category: string;
-  image: string;
-  rating: { rate: number; count: number };
-}
-
-export async function getProducts(category?: string): Promise<Product[]> {
+export async function fetchProducts(category?: string): Promise<Product[]> {
   try {
     const url = category
       ? `https://fakestoreapi.com/products/category/${encodeURIComponent(category)}`
       : 'https://fakestoreapi.com/products';
-
-    const res = await fetch(url, {
-      cache: 'no-store',
-      signal: AbortSignal.timeout(5000),
-    });
-
+    const res = await fetch(url, { cache: 'no-store', signal: AbortSignal.timeout(5000) });
     if (!res.ok) throw new Error('API error');
     const data = await res.json();
     if (!Array.isArray(data) || data.length === 0) throw new Error('Empty');
     return data;
   } catch {
-    // Return mock data as fallback
-    if (category) {
-      return MOCK_PRODUCTS.filter(p => p.category === category);
-    }
-    return MOCK_PRODUCTS;
+    return category ? MOCK_PRODUCTS.filter(p => p.category === category) : MOCK_PRODUCTS;
   }
 }
 
-export async function getCategories(): Promise<string[]> {
+export async function fetchCategories(): Promise<string[]> {
   try {
-    const res = await fetch('https://fakestoreapi.com/products/categories', {
-      cache: 'no-store',
-      signal: AbortSignal.timeout(5000),
-    });
+    const res = await fetch('https://fakestoreapi.com/products/categories', { cache: 'no-store', signal: AbortSignal.timeout(5000) });
     if (!res.ok) throw new Error('API error');
     const data = await res.json();
     if (!Array.isArray(data) || data.length === 0) throw new Error('Empty');
