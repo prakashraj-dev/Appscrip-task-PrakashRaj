@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
 import { Product, generateAltText, formatCategoryLabel } from '@/lib/api';
 import styles from './ProductCard.module.css';
 
@@ -46,17 +45,15 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
       />
 
-      {/* Image area */}
       <div className={styles.imageWrapper}>
         {!imageError ? (
-          <Image
+          <img
             src={product.image}
             alt={altText}
-            fill
-            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
             className={styles.image}
-            priority={priority}
+            loading={priority ? 'eager' : 'lazy'}
             onError={() => setImageError(true)}
+            style={{ width: '100%', height: '100%', objectFit: 'contain' }}
           />
         ) : (
           <div className={styles.imageFallback} aria-label="Image unavailable">
@@ -74,7 +71,6 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
         </button>
       </div>
 
-      {/* Card info */}
       <div className={styles.info}>
         <p className={styles.category}>{categoryLabel}</p>
         <h2 className={styles.title} title={product.title}>
