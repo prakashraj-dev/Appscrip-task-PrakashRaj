@@ -1,0 +1,49 @@
+.header { position:sticky; top:0; z-index:100; background:var(--color-bg); border-bottom:1px solid var(--color-border); box-shadow:0 1px 4px rgba(0,0,0,0.04); }
+
+.topBar { background:var(--color-bg-secondary); border-bottom:1px solid var(--color-border); padding:6px 0; }
+.topBarInner { display:flex; align-items:center; justify-content:space-between; max-width:var(--max-width); margin:0 auto; padding:0 var(--spacing-xl); }
+.topBarText { font-size:0.7rem; font-weight:300; color:var(--color-text-muted); letter-spacing:0.05em; text-transform:uppercase; }
+.topBarRight { display:flex; align-items:center; gap:var(--spacing-md); }
+.langButton { font-family:var(--font-body); font-size:0.75rem; font-weight:500; color:var(--color-text-primary); background:none; border:none; padding:2px 6px; cursor:pointer; transition:color var(--transition); }
+.langButton:hover { color:var(--color-text-secondary); }
+
+.navWrapper { padding:0; }
+.navInner { display:grid; grid-template-columns:auto 1fr auto auto; align-items:center; gap:var(--spacing-lg); max-width:var(--max-width); margin:0 auto; padding:0 var(--spacing-xl); height:var(--header-height); }
+
+.logo { font-family:var(--font-display); font-size:1.5rem; font-weight:600; letter-spacing:0.12em; color:var(--color-text-primary); text-transform:uppercase; white-space:nowrap; transition:opacity var(--transition); }
+.logo:hover { opacity:0.75; }
+
+.desktopNav { display:flex; justify-content:center; }
+.navList { display:flex; align-items:center; gap:var(--spacing-xl); }
+.navLink { font-size:0.8rem; font-weight:500; letter-spacing:0.06em; text-transform:uppercase; color:var(--color-text-primary); padding:4px 0; position:relative; transition:color var(--transition); }
+.navLink::after { content:''; position:absolute; bottom:-2px; left:0; width:0; height:1px; background:var(--color-text-primary); transition:width var(--transition); }
+.navLink:hover { color:var(--color-text-secondary); }
+.navLink:hover::after { width:100%; }
+
+.actions { display:flex; align-items:center; gap:var(--spacing-sm); }
+.iconBtn { position:relative; display:flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:50%; color:var(--color-text-primary); transition:background-color var(--transition); }
+.iconBtn:hover { background-color:var(--color-bg-secondary); }
+.cartBadge { position:absolute; top:2px; right:2px; min-width:14px; height:14px; background:var(--color-text-primary); color:var(--color-bg); font-size:0.6rem; font-weight:600; border-radius:7px; display:flex; align-items:center; justify-content:center; padding:0 2px; }
+
+.hamburger { display:none; flex-direction:column; justify-content:center; gap:5px; width:36px; height:36px; padding:6px; background:none; border:none; cursor:pointer; }
+.bar { display:block; width:22px; height:1.5px; background:var(--color-text-primary); border-radius:2px; transition:transform 0.25s ease, opacity 0.25s ease; transform-origin:center; }
+.barTopOpen { transform:translateY(6.5px) rotate(45deg); }
+.barMidOpen { opacity:0; }
+.barBotOpen { transform:translateY(-6.5px) rotate(-45deg); }
+
+.mobileOverlay { position:fixed; inset:0; background:rgba(0,0,0,0.3); z-index:98; }
+.mobileNav { position:fixed; top:0; left:-280px; width:280px; height:100vh; background:var(--color-bg); z-index:99; padding:80px var(--spacing-xl) var(--spacing-xl); transition:left 0.3s ease; border-right:1px solid var(--color-border); }
+.mobileNavOpen { left:0; }
+.mobileNavList { display:flex; flex-direction:column; gap:var(--spacing-lg); }
+.mobileNavLink { font-size:1.1rem; font-weight:400; letter-spacing:0.04em; color:var(--color-text-primary); padding:var(--spacing-sm) 0; border-bottom:1px solid var(--color-border); display:block; transition:color var(--transition); }
+.mobileNavLink:hover { color:var(--color-text-secondary); }
+
+@media (max-width: 900px) {
+  .desktopNav { display:none; }
+  .navInner { grid-template-columns:auto 1fr auto; gap:var(--spacing-md); padding:0 var(--spacing-md); }
+  .hamburger { display:flex; }
+}
+@media (max-width: 768px) {
+  .topBarInner { padding:0 var(--spacing-md); }
+  .topBarText { display:none; }
+}
