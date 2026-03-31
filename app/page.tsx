@@ -1,3 +1,4 @@
+
 import { fetchProducts, fetchCategories, Product } from '@/lib/api';
 import Header from '@/components/Header/Header';
 import FilterBar from '@/components/FilterBar/FilterBar';
