@@ -1,4 +1,4 @@
-import { fetchProducts, fetchCategories } from '@/lib/api';
+import { fetchProducts, fetchCategories, Product } from '@/lib/api';
 import Header from '@/components/Header/Header';
 import FilterBar from '@/components/FilterBar/FilterBar';
 import ProductGrid from '@/components/ProductGrid/ProductGrid';
@@ -12,10 +12,19 @@ interface PageProps {
 export default async function ProductListingPage({ searchParams }: PageProps) {
   const { category, sort } = searchParams;
 
-  const [products, categories] = await Promise.all([
-    fetchProducts(category),
-    fetchCategories(),
-  ]);
+  let products: Product[] = [];
+  let categories: string[] = [];
+
+  try {
+    const [p, c] = await Promise.all([
+      fetchProducts(category),
+      fetchCategories(),
+    ]);
+    products = p;
+    categories = c;
+  } catch (err) {
+    console.error('Failed to fetch data:', err);
+  }
 
   const sortedProducts = [...products].sort((a, b) => {
     switch (sort) {
