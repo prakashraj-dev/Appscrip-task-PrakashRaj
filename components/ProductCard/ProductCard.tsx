@@ -11,7 +11,6 @@ interface ProductCardProps {
 
 export default function ProductCard({ product, priority = false }: ProductCardProps) {
   const [wished, setWished] = useState(false);
-  const [imageError, setImageError] = useState(false);
 
   const altText = generateAltText(product.title, product.category);
   const categoryLabel = formatCategoryLabel(product.category);
@@ -46,20 +45,13 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
       />
 
       <div className={styles.imageWrapper}>
-        {!imageError ? (
-          <img
-            src={product.image}
-            alt={altText}
-            className={styles.image}
-            loading={priority ? 'eager' : 'lazy'}
-            onError={() => setImageError(true)}
-            style={{ width: '100%', height: '100%', objectFit: 'contain' }}
-          />
-        ) : (
-          <div className={styles.imageFallback} aria-label="Image unavailable">
-            <span>No Image</span>
-          </div>
-        )}
+        <img
+          src={product.image}
+          alt={altText}
+          className={styles.image}
+          loading={priority ? 'eager' : 'lazy'}
+          style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+        />
 
         <button
           className={`${styles.wishlistBtn} ${wished ? styles.wishlistBtnActive : ''}`}

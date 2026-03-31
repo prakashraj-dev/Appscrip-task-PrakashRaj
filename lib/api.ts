@@ -8,7 +8,7 @@ export interface Product {
   rating: { rate: number; count: number };
 }
 
-const MOCK_PRODUCTS: Product[] = [
+export const MOCK_PRODUCTS: Product[] = [
   { id: 1, title: "Fjallraven - Foldsack No. 1 Backpack", price: 109.95, description: "Your perfect pack for everyday use and walks in the forest.", category: "men's clothing", image: "https://fakestoreapi.com/img/81fAn1SswnL._AC_UX679_.jpg", rating: { rate: 3.9, count: 120 } },
   { id: 2, title: "Mens Casual Premium Slim Fit T-Shirts", price: 22.3, description: "Slim-fitting style, contrast raglan long sleeve.", category: "men's clothing", image: "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg", rating: { rate: 4.1, count: 259 } },
   { id: 3, title: "Mens Cotton Jacket", price: 55.99, description: "Great outerwear jackets for Spring/Autumn/Winter.", category: "men's clothing", image: "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg", rating: { rate: 4.7, count: 500 } },
@@ -31,7 +31,7 @@ const MOCK_PRODUCTS: Product[] = [
   { id: 20, title: "DANVOUY Womens T Shirt Casual Cotton Short", price: 12.99, description: "95% COTTON, 5% SPANDEX, Made in USA or Imported.", category: "women's clothing", image: "https://fakestoreapi.com/img/61pHAEJ4NML._AC_UX679_.jpg", rating: { rate: 3.6, count: 145 } },
 ];
 
-const MOCK_CATEGORIES = ["electronics", "jewelery", "men's clothing", "women's clothing"];
+export const MOCK_CATEGORIES = ["electronics", "jewelery", "men's clothing", "women's clothing"];
 
 export function formatCategoryLabel(category: string): string {
   return category
@@ -45,28 +45,9 @@ export function generateAltText(title: string, category?: string): string {
 }
 
 export async function fetchProducts(category?: string): Promise<Product[]> {
-  try {
-    const url = category
-      ? `https://fakestoreapi.com/products/category/${encodeURIComponent(category)}`
-      : 'https://fakestoreapi.com/products';
-    const res = await fetch(url, { next: { revalidate: 0 } });
-    if (!res.ok) throw new Error('API error');
-    const data = await res.json();
-    if (!Array.isArray(data) || data.length === 0) throw new Error('Empty');
-    return data;
-  } catch {
-    return category ? MOCK_PRODUCTS.filter(p => p.category === category) : MOCK_PRODUCTS;
-  }
+  return category ? MOCK_PRODUCTS.filter(p => p.category === category) : MOCK_PRODUCTS;
 }
 
 export async function fetchCategories(): Promise<string[]> {
-  try {
-    const res = await fetch('https://fakestoreapi.com/products/categories', { next: { revalidate: 0 } });
-    if (!res.ok) throw new Error('API error');
-    const data = await res.json();
-    if (!Array.isArray(data) || data.length === 0) throw new Error('Empty');
-    return data;
-  } catch {
-    return MOCK_CATEGORIES;
-  }
+  return MOCK_CATEGORIES;
 }
