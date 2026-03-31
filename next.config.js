@@ -7,6 +7,10 @@ const nextConfig = {
         hostname: 'fakestoreapi.com',
         pathname: '/img/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'picsum.photos',
+      },
     ],
   },
 };
