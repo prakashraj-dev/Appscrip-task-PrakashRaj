@@ -17,44 +17,20 @@ export const MOCK_PRODUCTS: Product[] = [
   
   // JEWELLERY
   { id: 5, title: "Naga Dragon Bracelet", price: 695, description: "Bracelet", category: "jewellery", image: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=800", rating: { rate: 4.6, count: 400 } },
-  { 
-  id: 6, 
-  title: "Solid Gold Petite Ring", 
-  price: 168, 
-  description: "Ring", 
-  category: "jewellery", 
-  image: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?q=80&w=800", 
-  rating: { rate: 3.9, count: 70 } 
-},
+  { id: 6, title: "Solid Gold Petite Ring", price: 168, description: "Ring", category: "jewellery", image: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?q=80&w=800", rating: { rate: 3.9, count: 70 } },
   { id: 7, title: "White Gold Princess Ring", price: 9.99, description: "Ring", category: "jewellery", image: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?q=80&w=800", rating: { rate: 3, count: 400 } },
   { id: 8, title: "Rose Gold Earrings", price: 10.99, description: "Earrings", category: "jewellery", image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?q=80&w=800", rating: { rate: 1.9, count: 100 } },
 
   // ELECTRONICS
   { id: 9, title: "WD 2TB Hard Drive", price: 64, description: "Storage", category: "electronics", image: "https://images.unsplash.com/photo-1562976540-1502c2145186?q=80&w=800", rating: { rate: 3.3, count: 203 } },
-  { 
-  id: 10, 
-  title: "SanDisk SSD 1TB", 
-  price: 109, 
-  description: "Storage", 
-  category: "electronics", 
-  image: "https://images.unsplash.com/photo-1544652478-6653e09f18a2?q=80&w=800", 
-  rating: { rate: 2.9, count: 470 } 
-},
+  { id: 10, title: "SanDisk SSD 1TB", price: 109, description: "Storage", category: "electronics", image: "https://images.unsplash.com/photo-1544652478-6653e09f18a2?q=80&w=800", rating: { rate: 2.9, count: 470 } },
   { id: 13, title: "Acer 21.5 Monitor", price: 599, description: "Monitor", category: "electronics", image: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?q=80&w=800", rating: { rate: 2.9, count: 250 } },
   { id: 14, title: "Samsung 49-Inch Monitor", price: 999.99, description: "Monitor", category: "electronics", image: "https://images.unsplash.com/photo-1593640408182-31c70c8268f5?q=80&w=800", rating: { rate: 2.2, count: 140 } },
 
   // WOMEN'S CLOTHING
   { id: 18, title: "Women's Boat Neck T-shirt", price: 9.85, description: "T-shirt", category: "women's clothing", image: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=800", rating: { rate: 4.7, count: 130 } },
   { id: 19, title: "Opna Women's Tunic", price: 7.95, description: "Tunic", category: "women's clothing", image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=800", rating: { rate: 4.5, count: 146 } },
-  { 
-  id: 20, 
-  title: "Casual Cotton T Shirt", 
-  price: 12.99, 
-  description: "T-shirt", 
-  category: "women's clothing", 
-  image: "https://images.unsplash.com/photo-1554412933-514a83d2f3c8?q=80&w=800", 
-  rating: { rate: 3.6, count: 145 } 
-},
+  { id: 20, title: "Casual Cotton T Shirt", price: 12.99, description: "T-shirt", category: "women's clothing", image: "https://images.unsplash.com/photo-1554412933-514a83d2f3c8?q=80&w=800", rating: { rate: 3.6, count: 145 } },
 ];
 
 export const MOCK_CATEGORIES = ["electronics", "jewellery", "men's clothing", "women's clothing"];

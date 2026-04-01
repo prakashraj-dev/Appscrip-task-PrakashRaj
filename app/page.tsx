@@ -1,9 +1,16 @@
+import { Metadata } from 'next';
 import { fetchProducts, fetchCategories, Product } from '@/lib/api';
 import Header from '@/components/Header/Header';
 import FilterBar from '@/components/FilterBar/FilterBar';
 import ProductCard from '@/components/ProductCard/ProductCard';
 import Footer from '@/components/Footer/Footer';
 import styles from './page.module.css';
+
+// SEO Requirement
+export const metadata: Metadata = {
+  title: 'Discover Our Products | Appscrip Task',
+  description: 'Shop the latest collection of clothing, electronics, and jewellery.',
+};
 
 interface PageProps {
   searchParams: Promise<{ category?: string }>;

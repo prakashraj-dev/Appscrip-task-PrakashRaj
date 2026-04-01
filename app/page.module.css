@@ -1,5 +1,6 @@
 .mainContainer {
   background-color: #fff;
+  min-height: 100vh;
 }
 
 .heroSection {
@@ -8,28 +9,39 @@
 }
 
 .heroTitle {
-  font-size: 48px;
+  font-size: clamp(2rem, 5vw, 3rem);
   font-weight: 600;
   margin-bottom: 16px;
+  text-transform: uppercase;
+  color: #111;
 }
 
 .heroSubtitle {
   max-width: 600px;
   margin: 0 auto;
   color: #666;
+  line-height: 1.6;
 }
 
 .productGrid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 ITEMS PER ROW */
+  /* 4 ITEMS PER ROW ON DESKTOP */
+  grid-template-columns: repeat(4, 1fr);
   gap: 40px 20px;
   padding: 40px 0;
+  margin-top: 20px;
 }
 
+/* TABLET VIEW */
 @media (max-width: 1024px) {
   .productGrid { grid-template-columns: repeat(2, 1fr); }
 }
 
+/* MOBILE VIEW */
 @media (max-width: 600px) {
-  .productGrid { grid-template-columns: 1fr; }
+  .productGrid { 
+    grid-template-columns: 1fr; 
+    padding: 20px;
+  }
+  .heroTitle { font-size: 1.75rem; }
 }
