@@ -12,4 +12,4 @@
 - Performance Optimized (LCP Priority Loading)
 
 ### Deployment
-Live Link: [Insert your Vercel URL here]
+Live Link: [https://appscrip-task-candidate-63l8j66g0-pr712906-8598s-projects.vercel.app/]
