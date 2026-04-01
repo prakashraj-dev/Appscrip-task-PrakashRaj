@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Product, generateAltText, formatCategoryLabel } from '@/lib/api';
 import styles from './ProductCard.module.css';
 

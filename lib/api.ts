@@ -60,3 +60,8 @@ export function formatCategoryLabel(category: string): string {
   };
   return map[category] ?? category.replace(/\b\w/g, c => c.toUpperCase());
 }
+
+// THE MISSING EXPORT:
+export function generateAltText(title: string, category: string): string {
+  return `${title} - ${formatCategoryLabel(category)} product image`;
+}
