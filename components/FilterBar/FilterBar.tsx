@@ -15,12 +15,14 @@ export default function FilterBar({ categories, activeCategory = 'all', productC
 
   const handleCategoryClick = (category: string) => {
     const params = new URLSearchParams(searchParams.toString());
+    
+    // We must match the EXACT string in api.ts
     if (category === 'all') {
       params.delete('category');
     } else {
-      params.set('category', category.toLowerCase());
+      params.set('category', category); 
     }
-    // Update the URL without refreshing the whole page
+    
     router.push(`?${params.toString()}`, { scroll: false });
   };
 
@@ -28,7 +30,7 @@ export default function FilterBar({ categories, activeCategory = 'all', productC
     <div className={styles.filterBar}>
       <div className={styles.tabs}>
         <button 
-          className={(!activeCategory || activeCategory === 'all') ? styles.activeTab : styles.tab}
+          className={(activeCategory === 'all' || !activeCategory) ? styles.activeTab : styles.tab}
           onClick={() => handleCategoryClick('all')}
         >
           ALL
@@ -43,7 +45,7 @@ export default function FilterBar({ categories, activeCategory = 'all', productC
           </button>
         ))}
       </div>
-      <div className={styles.count}>
+      <div className={styles.itemCount}>
         <strong>{productCount}</strong> ITEMS
       </div>
     </div>
