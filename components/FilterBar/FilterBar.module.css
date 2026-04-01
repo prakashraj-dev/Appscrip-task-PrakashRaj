@@ -1,230 +1,24 @@
-/* ─── Filter Bar ─────────────────────────────────────────── */
-.filterBar {
-  border-bottom: 1px solid var(--color-border);
-  background: var(--color-bg);
-  position: sticky;
-  top: var(--header-height);
-  z-index: 50;
-}
-
-/* ── Category row ── */
-.categoryRow {
-  border-bottom: 1px solid var(--color-border);
-  overflow: hidden;
-}
-
-.categoryScroll {
+.tabs {
   display: flex;
+  gap: 20px;
   align-items: center;
-  gap: 0;
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 var(--spacing-xl);
-  overflow-x: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
 }
 
-.categoryScroll::-webkit-scrollbar {
-  display: none;
-}
-
-.catBtn {
-  flex-shrink: 0;
-  font-family: var(--font-body);
-  font-size: 0.72rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  color: var(--color-text-secondary);
-  padding: 14px 20px;
-  border: none;
-  background: none;
-  cursor: pointer;
-  border-bottom: 2px solid transparent;
-  margin-bottom: -1px;
-  transition: color var(--transition), border-color var(--transition);
-  white-space: nowrap;
-}
-
-.catBtn:hover {
-  color: var(--color-text-primary);
-}
-
-.catBtnActive {
-  color: var(--color-text-primary);
-  border-bottom-color: var(--color-text-primary);
-}
-
-/* ── Control row ── */
-.controlRow {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 10px var(--spacing-xl);
-}
-
-.countLabel {
-  font-size: 0.75rem;
-  font-weight: 300;
-  letter-spacing: 0.05em;
-  color: var(--color-text-secondary);
-}
-
-.countLabel span {
-  font-weight: 600;
-  color: var(--color-text-primary);
-}
-
-.controls {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-md);
-}
-
-.controlBtn {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-family: var(--font-body);
-  font-size: 0.72rem;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  color: var(--color-text-secondary);
+.tab {
   background: none;
   border: none;
+  padding: 10px 20px;
   cursor: pointer;
-  padding: 4px 0;
-  transition: color var(--transition);
-  white-space: nowrap;
+  font-weight: 500;
+  color: #111;
 }
 
-.controlBtn:hover,
-.controlBtnActive {
-  color: var(--color-text-primary);
-}
-
-.divider {
-  width: 1px;
-  height: 14px;
-  background: var(--color-border-dark);
-}
-
-/* ── Sort dropdown ── */
-.sortWrapper {
-  position: relative;
-}
-
-.sortOverlay {
-  position: fixed;
-  inset: 0;
-  z-index: 9;
-}
-
-.sortDropdown {
-  position: absolute;
-  top: calc(100% + 8px);
-  right: 0;
-  min-width: 200px;
-  background: var(--color-bg);
-  border: 1px solid var(--color-border);
-  border-radius: 4px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-  z-index: 10;
-  overflow: hidden;
-}
-
-.sortOption {
-  padding: 10px var(--spacing-md);
-  font-family: var(--font-body);
-  font-size: 0.75rem;
-  font-weight: 400;
-  letter-spacing: 0.05em;
-  color: var(--color-text-secondary);
+/* This creates the black border look from your 4th image */
+.activeTab {
+  background: none;
+  border: 1px solid #000; 
+  padding: 10px 20px;
   cursor: pointer;
-  transition: background-color var(--transition), color var(--transition);
-}
-
-.sortOption:hover {
-  background: var(--color-bg-secondary);
-  color: var(--color-text-primary);
-}
-
-.sortOptionActive {
-  color: var(--color-text-primary);
-  font-weight: 600;
-  background: var(--color-bg-secondary);
-}
-
-/* ── Filter panel ── */
-.filterPanel {
-  border-top: 1px solid var(--color-border);
-  padding: var(--spacing-lg) var(--spacing-xl);
-  background: var(--color-bg-secondary);
-  max-width: 100%;
-}
-
-.filterHeading {
-  font-family: var(--font-body);
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  color: var(--color-text-secondary);
-  margin-bottom: var(--spacing-md);
-}
-
-.filterChips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacing-sm);
-}
-
-.chip {
-  font-family: var(--font-body);
-  font-size: 0.75rem;
-  font-weight: 400;
-  color: var(--color-text-secondary);
-  padding: 6px 16px;
-  border: 1px solid var(--color-border-dark);
-  border-radius: 20px;
-  background: var(--color-bg);
-  cursor: pointer;
-  transition: all var(--transition);
-}
-
-.chip:hover {
-  border-color: var(--color-text-primary);
-  color: var(--color-text-primary);
-}
-
-.chipActive {
-  background: var(--color-text-primary);
-  color: var(--color-bg);
-  border-color: var(--color-text-primary);
-}
-
-/* ─── Responsive ─────────────────────────────────────────── */
-@media (max-width: 768px) {
-  .categoryScroll {
-    padding: 0 var(--spacing-md);
-  }
-
-  .controlRow {
-    padding: 8px var(--spacing-md);
-  }
-
-  .catBtn {
-    padding: 12px 14px;
-    font-size: 0.68rem;
-  }
-
-  .filterPanel {
-    padding: var(--spacing-md);
-  }
-
-  .sortDropdown {
-    right: auto;
-    left: 0;
-  }
+  font-weight: bold;
+  color: #000;
 }
