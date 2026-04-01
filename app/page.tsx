@@ -17,7 +17,8 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ c
   return (
     <div className={styles.mainContainer}>
       <Header />
-      <main className="container">
+      
+      <main>
         <section className={styles.heroSection}>
           <h1 className={styles.heroTitle}>DISCOVER OUR PRODUCTS</h1>
           <p className={styles.heroSubtitle}>
@@ -25,18 +26,21 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ c
           </p>
         </section>
 
-        <FilterBar 
-          categories={categories} 
-          activeCategory={selectedCategory} 
-          productCount={products.length} 
-        />
+        <div className={styles.contentWrapper}>
+          <FilterBar 
+            categories={categories} 
+            activeCategory={selectedCategory} 
+            productCount={products.length} 
+          />
 
-        <div className={styles.productGrid}>
-          {products.map((product: Product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
+          <div className={styles.productGrid}>
+            {products.map((product: Product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
         </div>
       </main>
+
       <Footer />
     </div>
   );

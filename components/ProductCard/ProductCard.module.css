@@ -1,30 +1,61 @@
 .card {
   display: flex;
   flex-direction: column;
-  background: #fff;
+  cursor: pointer;
 }
 
 .imageWrapper {
+  position: relative;
   width: 100%;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 1 / 1; /* Forces the square box */
   background-color: #F5F5F5;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
+  margin-bottom: 12px;
+  overflow: hidden;
 }
 
 .image {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain; /* THE FIX FOR ZOOMING */
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Fills the square completely */
+  transition: transform 0.3s ease;
+}
+
+.card:hover .image {
+  transform: scale(1.05);
+}
+
+.info {
+  padding: 4px 0;
+}
+
+.category {
+  font-size: 10px;
+  color: #888;
+  text-transform: uppercase;
+  margin-bottom: 4px;
 }
 
 .title {
   font-size: 14px;
   font-weight: 600;
-  margin: 10px 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  margin-bottom: 8px;
+}
+
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rating {
+  font-size: 12px;
+  color: #111;
+}
+
+.price {
+  font-weight: 700;
+  font-size: 14px;
 }
