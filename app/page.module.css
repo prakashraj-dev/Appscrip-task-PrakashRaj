@@ -1,17 +1,23 @@
+/* Main Layout Container */
 .mainContainer {
-  background-color: #fff;
+  background-color: #ffffff;
   min-height: 100vh;
+  width: 100%;
 }
 
+/* ── Hero Section (The top text) ── */
 .heroSection {
   text-align: center;
   padding: 80px 20px;
+  border-bottom: 1px solid #e5e5e5;
+  margin-bottom: 20px;
 }
 
 .heroTitle {
-  font-size: clamp(2rem, 5vw, 3rem);
+  font-size: 48px;
   font-weight: 600;
-  margin-bottom: 16px;
+  letter-spacing: 1.5px;
+  margin-bottom: 20px;
   text-transform: uppercase;
   color: #111;
 }
@@ -20,28 +26,59 @@
   max-width: 600px;
   margin: 0 auto;
   color: #666;
+  font-size: 16px;
   line-height: 1.6;
 }
 
+/* ── Product Grid Logic ── */
 .productGrid {
   display: grid;
-  /* 4 ITEMS PER ROW ON DESKTOP */
+  /* DESKTOP: Exactly 4 columns */
   grid-template-columns: repeat(4, 1fr);
-  gap: 40px 20px;
-  padding: 40px 0;
-  margin-top: 20px;
+  gap: 40px 24px;
+  max-width: 1200px; /* This keeps the grid centered and not too wide */
+  margin: 0 auto;
+  padding: 40px 20px;
 }
 
-/* TABLET VIEW */
+/* ── RESPONSIVE DESIGN (The Mobile Fix) ── */
+
+/* TABLET VIEW (Screens smaller than 1024px) */
 @media (max-width: 1024px) {
-  .productGrid { grid-template-columns: repeat(2, 1fr); }
+  .productGrid {
+    grid-template-columns: repeat(2, 1fr); /* Switch to 2 columns */
+    gap: 30px 20px;
+  }
+  
+  .heroTitle {
+    font-size: 36px;
+  }
 }
 
-/* MOBILE VIEW */
+/* MOBILE VIEW (Screens smaller than 600px) */
 @media (max-width: 600px) {
-  .productGrid { 
-    grid-template-columns: 1fr; 
+  .productGrid {
+    grid-template-columns: 1fr; /* Switch to 1 column (Single Stack) */
     padding: 20px;
   }
-  .heroTitle { font-size: 1.75rem; }
+  
+  .heroSection {
+    padding: 40px 15px;
+  }
+  
+  .heroTitle {
+    font-size: 28px;
+  }
+  
+  .heroSubtitle {
+    font-size: 14px;
+  }
+}
+
+/* Utility for empty states */
+.noProducts {
+  text-align: center;
+  padding: 100px 0;
+  color: #999;
+  font-size: 18px;
 }
