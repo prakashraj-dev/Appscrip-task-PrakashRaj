@@ -18,16 +18,17 @@ export default function FilterBar({ categories, activeCategory = 'all', productC
     if (category === 'all') {
       params.delete('category');
     } else {
-      params.set('category', category);
+      params.set('category', category.toLowerCase());
     }
-    router.push(`?${params.toString()}`);
+    // Update the URL without refreshing the whole page
+    router.push(`?${params.toString()}`, { scroll: false });
   };
 
   return (
     <div className={styles.filterBar}>
       <div className={styles.tabs}>
         <button 
-          className={activeCategory === 'all' ? styles.activeTab : styles.tab}
+          className={(!activeCategory || activeCategory === 'all') ? styles.activeTab : styles.tab}
           onClick={() => handleCategoryClick('all')}
         >
           ALL
