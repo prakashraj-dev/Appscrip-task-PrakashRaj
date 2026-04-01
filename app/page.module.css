@@ -1,41 +1,29 @@
 .mainContainer {
   background-color: #fff;
-  min-height: 100vh;
 }
 
 .heroSection {
   text-align: center;
   padding: 80px 20px;
-  border-bottom: 1px solid #e5e5e5;
 }
 
 .heroTitle {
   font-size: 48px;
-  font-weight: 500;
-  letter-spacing: 1px;
+  font-weight: 600;
   margin-bottom: 16px;
-  text-transform: uppercase;
 }
 
 .heroSubtitle {
-  font-size: 16px;
-  color: #666;
   max-width: 600px;
   margin: 0 auto;
-  line-height: 1.5;
-}
-
-.contentWrapper {
-  max-width: 1200px; /* This prevents the stretching/overlapping */
-  margin: 0 auto;
-  padding: 0 20px;
+  color: #666;
 }
 
 .productGrid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 Columns like your screenshot */
-  gap: 40px 24px;
-  padding: 40px 0 80px;
+  grid-template-columns: repeat(4, 1fr); /* 4 ITEMS PER ROW */
+  gap: 40px 20px;
+  padding: 40px 0;
 }
 
 @media (max-width: 1024px) {
@@ -44,5 +32,4 @@
 
 @media (max-width: 600px) {
   .productGrid { grid-template-columns: 1fr; }
-  .heroTitle { font-size: 32px; }
 }

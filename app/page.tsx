@@ -5,20 +5,32 @@ import ProductCard from '@/components/ProductCard/ProductCard';
 import Footer from '@/components/Footer/Footer';
 import styles from './page.module.css';
 
-export default async function Page({ searchParams }: { searchParams: Promise<{ category?: string }> }) {
+interface PageProps {
+  searchParams: Promise<{ category?: string }>;
+}
+
+export default async function ProductListingPage({ searchParams }: PageProps) {
   const resolvedParams = await searchParams;
   const selectedCategory = resolvedParams.category || 'all';
 
-  const [products, categories] = await Promise.all([
-    fetchProducts(selectedCategory),
-    fetchCategories(),
-  ]);
+  let products: Product[] = [];
+  let categories: string[] = [];
+
+  try {
+    const [p, c] = await Promise.all([
+      fetchProducts(selectedCategory),
+      fetchCategories(),
+    ]);
+    products = p;
+    categories = c;
+  } catch (error) {
+    console.error("Error loading products:", error);
+  }
 
   return (
     <div className={styles.mainContainer}>
       <Header />
-      
-      <main>
+      <main className="container">
         <section className={styles.heroSection}>
           <h1 className={styles.heroTitle}>DISCOVER OUR PRODUCTS</h1>
           <p className={styles.heroSubtitle}>
@@ -26,21 +38,18 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ c
           </p>
         </section>
 
-        <div className={styles.contentWrapper}>
-          <FilterBar 
-            categories={categories} 
-            activeCategory={selectedCategory} 
-            productCount={products.length} 
-          />
+        <FilterBar 
+          categories={categories} 
+          activeCategory={selectedCategory} 
+          productCount={products.length} 
+        />
 
-          <div className={styles.productGrid}>
-            {products.map((product: Product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
+        <div className={styles.productGrid}>
+          {products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
         </div>
       </main>
-
       <Footer />
     </div>
   );
