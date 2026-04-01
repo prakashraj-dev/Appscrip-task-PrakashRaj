@@ -1,4 +1,4 @@
-import { fetchProducts, fetchCategories } from '@/lib/api';
+import { fetchProducts, fetchCategories, Product } from '@/lib/api';
 import Header from '@/components/Header/Header';
 import FilterBar from '@/components/FilterBar/FilterBar';
 import ProductCard from '@/components/ProductCard/ProductCard';
@@ -15,9 +15,9 @@ export default async function ProductListingPage({ searchParams }: PageProps) {
   const resolvedParams = await searchParams;
   const selectedCategory = resolvedParams.category || 'all';
 
-  // Fetch data based on the URL category
-  let products = [];
-  let categories = [];
+  // FIX: Explicitly define types so TypeScript doesn't complain
+  let products: Product[] = [];
+  let categories: string[] = [];
 
   try {
     const [p, c] = await Promise.all([
