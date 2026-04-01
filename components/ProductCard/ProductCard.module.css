@@ -3,8 +3,12 @@
   cursor: pointer;
   transition: box-shadow 0.2s ease;
 }
-.card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
 
+.card:hover {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+/* ── Image wrapper: square aspect ratio ── */
 .imageWrapper {
   position: relative;
   width: 100%;
@@ -15,25 +19,37 @@
 
 .image {
   position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   padding: 12px;
-  transition: transform 0.3s ease;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
-.imageWrapper:hover .image { transform: scale(1.04); }
 
+.imageWrapper:hover .image {
+  transform: scale(1.04);
+}
+
+/* ── Fallback card when image fails ── */
 .fallback {
   position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 8px;
 }
-.fallbackIcon { font-size: 3rem; }
+
+.fallbackIcon {
+  font-size: 3rem;
+}
+
 .fallbackLabel {
   font-size: 0.75rem;
   font-weight: 500;
@@ -42,10 +58,13 @@
   opacity: 0.8;
 }
 
+/* ── Wishlist button ── */
 .wishlistBtn {
   position: absolute;
-  top: 8px; right: 8px;
-  width: 32px; height: 32px;
+  top: 8px;
+  right: 8px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   background: rgba(255,255,255,0.92);
   border: none;
@@ -58,10 +77,20 @@
   z-index: 1;
   transition: color 0.2s, transform 0.2s;
 }
-.wishlistBtn:hover { color: #cc3333; transform: scale(1.1); }
-.wishlistBtnActive { color: #cc3333; }
 
-.info { padding: 10px 4px 12px; }
+.wishlistBtn:hover {
+  color: #cc3333;
+  transform: scale(1.1);
+}
+
+.wishlistBtnActive {
+  color: #cc3333;
+}
+
+/* ── Card info ── */
+.info {
+  padding: 10px 4px 12px;
+}
 
 .category {
   font-size: 10px;
@@ -92,11 +121,32 @@
   gap: 8px;
 }
 
-.rating { display: flex; align-items: center; gap: 3px; color: #f59e0b; flex-shrink: 0; }
-.ratingValue { color: #333; font-size: 12px; font-weight: 600; }
-.ratingCount { color: #aaa; font-size: 11px; }
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  color: #f59e0b;
+  flex-shrink: 0;
+}
 
-.price { font-size: 15px; font-weight: 700; color: #111; margin: 0; white-space: nowrap; }
+.ratingValue {
+  color: #333;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.ratingCount {
+  color: #aaa;
+  font-size: 11px;
+}
+
+.price {
+  font-size: 15px;
+  font-weight: 700;
+  color: #111;
+  margin: 0;
+  white-space: nowrap;
+}
 
 @media (max-width: 480px) {
   .title { font-size: 12px; }

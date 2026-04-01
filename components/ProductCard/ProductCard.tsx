@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Product, generateAltText, formatCategoryLabel } from '@/lib/api';
 import styles from './ProductCard.module.css';
 
@@ -18,7 +18,13 @@ const CATEGORY_COLORS: Record<string, { bg: string; text: string }> = {
 
 export default function ProductCard({ product, priority = false }: ProductCardProps) {
   const [wished, setWished] = useState(false);
+  const [imgLoaded, setImgLoaded] = useState(false);
   const [imgError, setImgError] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const altText = generateAltText(product.title, product.category);
   const categoryLabel = formatCategoryLabel(product.category);
@@ -30,8 +36,17 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
     name: product.title,
     description: product.description,
     image: product.image,
-    offers: { '@type': 'Offer', price: product.price, priceCurrency: 'USD', availability: 'https://schema.org/InStock' },
-    aggregateRating: { '@type': 'AggregateRating', ratingValue: product.rating.rate, reviewCount: product.rating.count },
+    offers: {
+      '@type': 'Offer',
+      price: product.price,
+      priceCurrency: 'USD',
+      availability: 'https://schema.org/InStock',
+    },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: product.rating.rate,
+      reviewCount: product.rating.count,
+    },
   };
 
   return (
@@ -39,18 +54,27 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }} />
 
       <div className={styles.imageWrapper}>
-        {imgError ? (
-          <div className={styles.fallback} style={{ background: fallback.bg, color: fallback.text }}>
+        {/* Always show fallback until image loads */}
+        {(!mounted || imgError || !imgLoaded) && (
+          <div
+            className={styles.fallback}
+            style={{ background: fallback.bg, color: fallback.text }}
+          >
             <span className={styles.fallbackIcon}>{getCategoryIcon(product.category)}</span>
             <span className={styles.fallbackLabel}>{categoryLabel}</span>
           </div>
-        ) : (
+        )}
+
+        {/* Load image client-side only */}
+        {mounted && !imgError && (
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={product.image}
             alt={altText}
             className={styles.image}
+            style={{ opacity: imgLoaded ? 1 : 0 }}
             loading={priority ? 'eager' : 'lazy'}
+            onLoad={() => setImgLoaded(true)}
             onError={() => setImgError(true)}
           />
         )}
@@ -83,8 +107,10 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
 
 function getCategoryIcon(category: string): string {
   const icons: Record<string, string> = {
-    "men's clothing": "👔", "women's clothing": "👗",
-    "jewelery": "💍", "electronics": "💻",
+    "men's clothing": "👔",
+    "women's clothing": "👗",
+    "jewelery": "💍",
+    "electronics": "💻",
   };
   return icons[category] ?? "🛍️";
 }
